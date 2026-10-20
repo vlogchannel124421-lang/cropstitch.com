@@ -1,0 +1,2381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+<title>CORPSTITCH | Uniforms & Formal Wear</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#fff;
+    color:#111;
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button,
+input,
+textarea,
+select{
+    font-family:inherit;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+.topbar{
+    background:#111;
+    color:#fff;
+    text-align:center;
+    padding:9px 15px;
+    font-size:11px;
+    letter-spacing:.5px;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:999;
+    background:rgba(255,255,255,.97);
+    border-bottom:1px solid #e7e7e7;
+    backdrop-filter:blur(12px);
+}
+
+.navbar{
+    max-width:1200px;
+    margin:auto;
+    min-height:76px;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+}
+
+.logo-img{
+    height:50px;
+    width:auto;
+    object-fit:contain;
+}
+
+.logo-text{
+    font-size:21px;
+    font-weight:900;
+    letter-spacing:4px;
+    line-height:1.2;
+}
+
+.logo-text span{
+    display:block;
+    font-size:8px;
+    color:#777;
+    letter-spacing:2px;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+    align-items:center;
+}
+
+.nav-links a{
+    font-size:12px;
+    font-weight:800;
+}
+
+.menu-btn{
+    display:none;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:9px 12px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:80px 20px;
+}
+
+.eyebrow{
+    color:#777;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:3px;
+    text-transform:uppercase;
+}
+
+.title{
+    font-size:clamp(42px,6vw,72px);
+    line-height:1;
+    letter-spacing:-4px;
+    margin:14px 0 22px;
+}
+
+.section-title{
+    font-size:48px;
+    line-height:1;
+    letter-spacing:-2px;
+    margin:12px 0 20px;
+}
+
+.text{
+    color:#666;
+    max-width:700px;
+}
+
+.btn{
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    padding:13px 18px;
+    border-radius:8px;
+    border:1px solid #111;
+    background:#111;
+    color:#fff;
+    font-size:12px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.btn.white{
+    background:#fff;
+    color:#111;
+    border-color:#ddd;
+}
+
+.btn.wa-green {
+    background: #25d366;
+    border-color: #25d366;
+    color: #fff;
+}
+
+.buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:28px;
+}
+
+/* HERO */
+
+.hero{
+    max-width:1200px;
+    min-height:calc(100vh - 100px);
+    margin:auto;
+    padding:70px 20px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+.hero p{
+    color:#666;
+    font-size:18px;
+    max-width:650px;
+}
+
+.hero-image{
+    height:600px;
+    overflow:hidden;
+    border-radius:22px;
+}
+
+.hero-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.stats{
+    display:flex;
+    gap:35px;
+    margin-top:35px;
+    padding-top:22px;
+    border-top:1px solid #ddd;
+}
+
+.stat strong{
+    display:block;
+    font-size:25px;
+}
+
+.stat small{
+    color:#777;
+}
+
+/* COLLECTION */
+
+.collection-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:30px;
+    margin-bottom:35px;
+}
+
+.collection-head p{
+    color:#666;
+    max-width:550px;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.product{
+    border:1px solid #e4e4e4;
+    border-radius:18px;
+    overflow:hidden;
+    background:#fff;
+    transition:.25s;
+}
+
+.product:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 40px rgba(0,0,0,.07);
+}
+
+.product-image{
+    height:290px;
+    overflow:hidden;
+    background:#eee;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.product-content{
+    padding:20px;
+}
+
+.badge{
+    display:inline-block;
+    background:#f2f2f2;
+    padding:5px 9px;
+    border-radius:30px;
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.product h3{
+    margin:12px 0 7px;
+    font-size:19px;
+}
+
+.product p{
+    min-height:60px;
+    color:#666;
+    font-size:13px;
+}
+
+.price{
+    margin-top:12px;
+    font-size:19px;
+    font-weight:900;
+}
+
+.price small{
+    font-size:10px;
+    color:#777;
+    font-weight:500;
+}
+
+.product-actions{
+    display:flex;
+    gap:8px;
+    margin-top:17px;
+}
+
+.product-actions .btn{
+    flex:1;
+    font-size:10px;
+    padding:11px 6px;
+}
+
+.note{
+    margin-top:30px;
+    background:#f6f6f6;
+    border:1px solid #e4e4e4;
+    padding:15px;
+    border-radius:10px;
+    font-size:12px;
+    color:#666;
+}
+
+/* ABOUT */
+
+.two-column{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+.about-image{
+    height:540px;
+    overflow:hidden;
+    border-radius:22px;
+}
+
+.about-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.check-list{
+    display:grid;
+    gap:17px;
+    margin-top:28px;
+}
+
+.check{
+    display:flex;
+    gap:12px;
+}
+
+.check-icon{
+    width:29px;
+    height:29px;
+    background:#111;
+    color:#fff;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    flex:none;
+    font-size:12px;
+}
+
+.check b{
+    display:block;
+}
+
+.check span{
+    color:#666;
+    font-size:13px;
+}
+
+/* WHY */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin:30px 0;
+}
+
+.feature{
+    border:1px solid #e3e3e3;
+    border-radius:16px;
+    padding:22px;
+}
+
+.feature-number{
+    color:#777;
+    font-size:11px;
+}
+
+.feature h3{
+    margin:12px 0 6px;
+}
+
+.feature p{
+    color:#666;
+    font-size:13px;
+}
+
+/* DRIVE MEDIA */
+
+.drive-gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:30px;
+}
+
+.drive-photo{
+    border:1px solid #e3e3e3;
+    border-radius:16px;
+    overflow:hidden;
+    background:#f5f5f5;
+}
+
+.drive-photo img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+}
+
+.drive-photo div{
+    padding:13px 15px;
+    background:#fff;
+    font-size:12px;
+    font-weight:800;
+}
+
+.single-video-container{
+    max-width:700px;
+    margin:25px auto 0 auto;
+}
+
+.drive-video{
+    border:1px solid #e3e3e3;
+    border-radius:16px;
+    overflow:hidden;
+    background:#111;
+}
+
+.drive-video iframe{
+    width:100%;
+    height:400px;
+    border:0;
+    display:block;
+}
+
+.drive-video div{
+    background:#fff;
+    padding:13px;
+    font-size:12px;
+    font-weight:800;
+    text-align:center;
+}
+
+/* REVIEWS */
+
+.rating-box{
+    border:1px solid #ddd;
+    border-radius:18px;
+    padding:25px;
+    display:flex;
+    gap:25px;
+    align-items:center;
+    margin:25px 0;
+}
+
+.rating-number{
+    font-size:55px;
+    font-weight:900;
+}
+
+.stars{
+    letter-spacing:3px;
+}
+
+.rating-box small{
+    color:#777;
+}
+
+.reviews{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.review{
+    border:1px solid #e3e3e3;
+    border-radius:16px;
+    padding:20px;
+}
+
+.review p{
+    font-size:14px;
+    margin:12px 0;
+}
+
+.review small{
+    color:#777;
+    font-size:11px;
+}
+
+/* CONTACT */
+
+.contact-layout{
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+    gap:45px;
+}
+
+.contact-info{
+    display:grid;
+    gap:14px;
+    margin-top:30px;
+}
+
+.info-box{
+    border:1px solid #e3e3e3;
+    border-radius:15px;
+    padding:18px;
+}
+
+.info-box b{
+    display:block;
+    margin-bottom:5px;
+}
+
+.info-box span{
+    color:#666;
+    font-size:13px;
+}
+
+.form{
+    border:1px solid #ddd;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,.04);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.form-group{
+    display:grid;
+    gap:6px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1px;
+    color:#666;
+    text-transform:uppercase;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:12px;
+    outline:none;
+    background:#fff;
+}
+
+.form-group textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.form-note{
+    margin:15px 0;
+    background:#f6f6f6;
+    padding:13px;
+    border-radius:9px;
+    color:#666;
+    font-size:11px;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid #e5e5e5;
+    background:#fafafa;
+}
+
+.footer{
+    max-width:1200px;
+    margin:auto;
+    padding:50px 20px;
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    gap:35px;
+}
+
+.footer p,
+.footer li{
+    color:#666;
+    font-size:13px;
+}
+
+.footer ul{
+    list-style:none;
+    margin-top:10px;
+    line-height:2;
+}
+
+.copyright{
+    border-top:1px solid #e5e5e5;
+    text-align:center;
+    padding:15px;
+    color:#777;
+    font-size:10px;
+}
+
+/* WHATSAPP */
+
+.whatsapp{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#25d366;
+    color:#fff;
+    border-radius:50px;
+    padding:13px 18px;
+    z-index:1000;
+    font-size:12px;
+    font-weight:800;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:76px;
+        left:0;
+        right:0;
+        background:#fff;
+        padding:20px;
+        border-bottom:1px solid #ddd;
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .nav-links.open{
+        display:flex;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .hero,
+    .two-column,
+    .contact-layout{
+        grid-template-columns:1fr;
+    }
+
+    .hero-image{
+        height:450px;
+    }
+
+    .products{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .features{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .drive-gallery{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .reviews{
+        grid-template-columns:1fr;
+    }
+
+    .footer{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .container{
+        padding:55px 16px;
+    }
+
+    .hero{
+        padding:50px 16px;
+    }
+
+    .title{
+        font-size:46px;
+    }
+
+    .section-title{
+        font-size:38px;
+    }
+
+    .products,
+    .features,
+    .drive-gallery,
+    .footer{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .hero-image{
+        height:400px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div class="topbar">
+CORPSTITCH · CUSTOM UNIFORMS · FORMAL WEAR · BULK & B2B
+</div>
+
+
+<header>
+
+<nav class="navbar">
+
+<a href="#home" onclick="showPage('home')" class="logo">
+<img src="https://drive.google.com/thumbnail?id=1ysY_gSDBjNCPsifYcBn_duSJqwy0zDr7&sz=w1000" alt="CORPSTITCH Logo" class="logo-img">
+<div class="logo-text">
+CORPSTITCH
+<span>UNIFORMS · FORMAL WEAR · B2B</span>
+</div>
+</a>
+
+
+<div class="nav-links" id="navLinks">
+
+<a href="#home" onclick="showPage('home')">HOME</a>
+
+<a href="#collections" onclick="showPage('collections')">
+COLLECTION
+</a>
+
+<a href="#about" onclick="showPage('about')">
+ABOUT
+</a>
+
+<a href="#why" onclick="showPage('why')">
+WHY US
+</a>
+
+<a href="#reviews" onclick="showPage('reviews')">
+REVIEWS
+</a>
+
+<a href="#contact" onclick="showPage('contact')">
+CONTACT
+</a>
+
+</div>
+
+
+<button
+class="menu-btn"
+onclick="toggleMenu()">
+
+MENU
+
+</button>
+
+</nav>
+
+</header>
+
+
+
+<!-- =====================================================
+HOME
+===================================================== -->
+
+<section id="home" class="page active">
+
+<div class="hero">
+
+<div>
+
+<div class="eyebrow">
+BENGALURU · SHIVAJI NAGAR
+</div>
+
+<h1 class="title">
+Uniforms made for professional teams.
+</h1>
+
+<p>
+CORPSTITCH is a professional uniform and garment
+manufacturing business based in Bengaluru, offering
+customised and bulk requirements for corporate companies,
+schools, colleges, hotels, industries and institutions.
+</p>
+
+
+<div class="buttons">
+
+<a
+class="btn"
+href="#contact"
+onclick="showPage('contact')">
+
+GET BULK QUOTE
+
+</a>
+
+
+<a
+class="btn wa-green"
+target="_blank"
+rel="noopener noreferrer"
+href="https://wa.me/917022514114?text=Hello%20CORPSTITCH%2C%20I%20want%20a%20bulk%20quotation.">
+
+💬 CHAT ON WHATSAPP (1-CLICK)
+
+</a>
+
+
+<a
+class="btn white"
+target="_blank"
+rel="noopener noreferrer"
+href="https://www.google.com/maps/search/?api=1&query=CORPSTITCH%2C%20Shop%20No.%205%2C%20First%20Floor%2C%20No.%2074%2C%20Dharmaraj%20Koil%20Street%2C%20Shivaji%20Nagar%2C%20Bengaluru%20560001">
+
+OPEN MAP
+
+</a>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+
+<strong>5.0★</strong>
+
+<small>GOOGLE RATING</small>
+
+</div>
+
+
+<div class="stat">
+
+<strong>16</strong>
+
+<small>REVIEWS</small>
+
+</div>
+
+
+<div class="stat">
+
+<strong>11–8</strong>
+
+<small>BUSINESS HOURS</small>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="hero-image">
+
+<img
+src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkjmDhTIXe5SlMyha1wRwpRNbN-H0lbYwZucOkp5LykfUbcSk-7OjW_BmSkF5CGZ3LrZs6gbWGVeQ5F_C4UtQ1nOVu542RyHUDC__2rBkp_7bXVOSuAKRMj3olLNkZ7uO-kxX-o1Ngb8t5z=w408-h509-k-no"
+alt="CORPSTITCH"
+>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+COLLECTION
+===================================================== -->
+
+<section id="collections" class="page">
+
+<div class="container">
+
+<div class="collection-head">
+
+<div>
+
+<div class="eyebrow">
+CORE COLLECTION · COMPETITIVE PRICING
+</div>
+
+<h2 class="section-title">
+Five key product categories.
+</h2>
+
+</div>
+
+<p>
+Indicative market-reference prices only. Final quotation
+depends on quantity, fabric, design, measurements,
+branding and customization.
+</p>
+
+</div>
+
+
+<div class="products">
+
+
+<!-- 1 -->
+
+<div class="product">
+
+<div class="product-image">
+
+<img
+src="https://drive.google.com/thumbnail?id=1DkaDe5TDuJB-tuy8rKwGUiOD4mxS-SNt&sz=w1000"
+alt="Corporate & Industrial Uniforms">
+
+</div>
+
+<div class="product-content">
+
+<span class="badge">BULK · VALUE PRICING</span>
+
+<h3>
+Corporate & Industrial Uniforms
+</h3>
+
+<p>
+Customised uniform requirements for corporate
+and industrial teams.
+</p>
+
+<div class="price">
+₹999 – ₹1,599
+<small>per set reference</small>
+</div>
+
+<div class="product-actions">
+
+<button
+class="btn"
+onclick="selectProduct('Corporate & Industrial Uniforms')">
+
+BULK ENQUIRY
+
+</button>
+
+<a
+class="btn wa-green"
+target="_blank"
+rel="noopener noreferrer"
+href="https://wa.me/917022514114?text=Hello%20CORPSTITCH%2C%20I%20want%20a%20quotation%20for%20Corporate%20%26%20Industrial%20Uniforms.">
+
+WHATSAPP
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 2 -->
+
+<div class="product">
+
+<div class="product-image">
+
+<img
+src="https://drive.google.com/thumbnail?id=1H7Gknc-SNyOLFrhlz0xdqtgmfB9z_BN1&sz=w1000"
+alt="School & College Uniforms">
+
+</div>
+
+<div class="product-content">
+
+<span class="badge">INSTITUTIONAL</span>
+
+<h3>
+School & College Uniforms
+</h3>
+
+<p>
+Uniform requirements for schools and colleges
+with bulk quantity quotation.
+</p>
+
+<div class="price">
+₹449 – ₹799
+<small>per set reference</small>
+</div>
+
+<div class="product-actions">
+
+<button
+class="btn"
+onclick="selectProduct('School & College Uniforms')">
+
+BULK ENQUIRY
+
+</button>
+
+<a
+class="btn wa-green"
+target="_blank"
+rel="noopener noreferrer"
+href="https://wa.me/917022514114?text=Hello%20CORPSTITCH%2C%20I%20want%20a%20quotation%20for%20School%20%26%20College%20Uniforms.">
+
+WHATSAPP
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 3 -->
+
+<div class="product">
+
+<div class="product-image">
+
+<img
+src="https://drive.google.com/thumbnail?id=1v8_aSZz1prln2sfwFXoPQ4vztd44jKPZ&sz=w1000"
+alt="Hotel & Hospitality Uniforms">
+
+</div>
+
+<div class="product-content">
+
+<span class="badge">HOSPITALITY</span>
+
+<h3>
+Hotel & Hospitality Uniforms
+</h3>
+
+<p>
+Professional hospitality uniform requirements
+for hotels and service teams.
+</p>
+
+<div class="price">
+₹899 – ₹2,199
+<small>per set reference</small>
+</div>
+
+<div class="product-actions">
+
+<button
+class="btn"
+onclick="selectProduct('Hotel & Hospitality Uniforms')">
+
+BULK ENQUIRY
+
+</button>
+
+<a
+class="btn wa-green"
+target="_blank"
+rel="noopener noreferrer"
+href="https://wa.me/917022514114?text=Hello%20CORPSTITCH%2C%20I%20want%20a%20quotation%20for%20Hotel%20%26%20Hospitality%20Uniforms.">
+
+WHATSAPP
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 4 -->
+
+<div class="product">
+
+<div class="product-image">
+
+<img
+src="https://drive.google.com/thumbnail?id=1Wu7VsWIjjAq8RCufT0S_LqMXhNEmB-X1&sz=w1000"
+alt="Corporate Blazers & Formal Wear">
+
+</div>
+
+<div class="product-content">
+
+<span class="badge">FORMAL</span>
+
+<h3>
+Corporate Blazers & Formal Wear
+</h3>
+
+<p>
+Professional blazers and formal wear for
+corporate requirements.
+</p>
+
+<div class="price">
+₹1,699 – ₹3,299
+<small>per piece reference</small>
+</div>
+
+<div class="product-actions">
+
+<button
+class="btn"
+onclick="selectProduct('Corporate Blazers & Formal Wear')">
+
+BULK ENQUIRY
+
+</button>
+
+<a
+class="btn wa-green"
+target="_blank"
+rel="noopener noreferrer"
+href="https://wa.me/917022514114?text=Hello%20CORPSTITCH%2C%20I%20want%20a%20quotation%20for%20Corporate%20Blazers%20%26%20Formal%20Wear.">
+
+WHATSAPP
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 5 -->
+
+<div class="product">
+
+<div class="product-image">
+
+<img
+src="https://drive.google.com/thumbnail?id=1b45zPLBHL_ji_NSye8qECuey-kYsWQmt&sz=w1000"
+alt="2-Piece & 3-Piece Suits">
+
+</div>
+
+<div class="product-content">
+
+<span class="badge">TAILORED</span>
+
+<h3>
+2-Piece & 3-Piece Suits
+</h3>
+
+<p>
+Tailored formal suits for professional and
+special occasion requirements.
+</p>
+
+<div class="price">
+₹2,499 – ₹5,699
+<small>per suit reference</small>
+</div>
+
+<div class="product-actions">
+
+<button
+class="btn"
+onclick="selectProduct('2-Piece & 3-Piece Suits')">
+
+BULK ENQUIRY
+
+</button>
+
+<a
+class="btn wa-green"
+target="_blank"
+rel="noopener noreferrer"
+href="https://wa.me/917022514114?text=Hello%20CORPSTITCH%2C%20I%20want%20a%20quotation%20for%202-Piece%20%26%203-Piece%20Suits.">
+
+WHATSAPP
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="note">
+
+<strong>Price disclaimer:</strong>
+These are indicative website prices and must be confirmed by CORPSTITCH before publishing.
+Final prices can vary with fabric, sizes, logo work, order quantity, taxes and delivery.
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+ABOUT
+===================================================== -->
+
+<section id="about" class="page">
+
+<div class="container two-column">
+
+<div class="about-image">
+
+<img
+src="https://lh3.googleusercontent.com/gps-cs-s/ANWiy9RA72mosXr4n-AUKg41939bZA__Fu-enS1m8h359qmTFqf5a5FR2RVlutAMgh4qlbkRkWwQMkwadGL5kVTeWiziNxOxTZ0D5p6dTXlPKIQ5Ktz2VNkWmkthrKxzETEfUPEKTdy_52u6yl3P=w238-h298-k-no"
+alt="CORPSTITCH">
+
+</div>
+
+
+<div>
+
+<div class="eyebrow">
+ABOUT CORPSTITCH
+</div>
+
+<h2 class="section-title">
+A professional garment partner for bulk requirements.
+</h2>
+
+<p class="text">
+
+CORPSTITCH is a professional uniform and garment
+manufacturing business based in Shivaji Nagar, Bengaluru.
+
+</p>
+
+<br>
+
+<p class="text">
+
+The supplied business information states that CORPSTITCH
+handles customised and bulk requirements for corporate
+companies, schools, colleges, hotels, industries,
+institutions, retailers, wholesalers and B2B buyers.
+
+</p>
+
+
+<div class="check-list">
+
+<div class="check">
+
+<div class="check-icon">✓</div>
+
+<div>
+
+<b>Custom Manufacturing</b>
+
+<span>
+Custom garment requirements based on organisation needs.
+</span>
+
+</div>
+
+</div>
+
+
+<div class="check">
+
+<div class="check-icon">✓</div>
+
+<div>
+
+<b>Bulk & B2B</b>
+
+<span>
+Bulk manufacturing and wholesale enquiries.
+</span>
+
+</div>
+
+</div>
+
+
+<div class="check">
+
+<div class="check-icon">✓</div>
+
+<div>
+
+<b>Uniform + Formal Wear</b>
+
+<span>
+Uniforms, blazers, suits, bandis and formal wear.
+</span>
+
+</div>
+
+</div>
+
+
+<div class="check">
+
+<div class="check-icon">✓</div>
+
+<div>
+
+<b>GSTIN Registered</b>
+
+<span>
+29AKWPY2436Q1ZR
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+WHY CHOOSE US
+===================================================== -->
+
+<section id="why" class="page">
+
+<div class="container">
+
+<div class="eyebrow">
+WHY CHOOSE CORPSTITCH
+</div>
+
+<h2 class="section-title">
+Built around professional bulk requirements.
+</h2>
+
+
+<div class="features">
+
+<div class="feature">
+
+<div class="feature-number">
+01
+</div>
+
+<h3>
+Custom Manufacturing
+</h3>
+
+<p>
+Custom garment requirements for organisations,
+institutions and teams.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-number">
+02
+</div>
+
+<h3>
+Bulk & B2B
+</h3>
+
+<p>
+Bulk quantities and B2B garment requirements
+through quotation.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-number">
+03
+</div>
+
+<h3>
+Multiple Sectors
+</h3>
+
+<p>
+Corporate, school, college, hotel, industrial
+and institutional requirements.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-number">
+04
+</div>
+
+<h3>
+Professional Finish
+</h3>
+
+<p>
+Quality fabrics, professional stitching and
+finishing based on supplied business information.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- =================================================
+GOOGLE DRIVE PHOTO SECTION
+================================================= -->
+
+<div class="eyebrow" style="margin-top:45px;">
+CORPSTITCH COLLECTION & WORK
+</div>
+
+<h2 class="section-title">
+Our work & collection.
+</h2>
+
+<p class="text">
+
+Photos below are loaded directly from the Google Drive
+files supplied for this website.
+
+</p>
+
+
+<div class="drive-gallery">
+
+
+<!-- DRIVE PHOTO 1 -->
+
+<div class="drive-photo">
+
+<img
+src="https://drive.google.com/thumbnail?id=1jQXWzcH4noayLrhtAzEauftbkWNzg26m&sz=w1200"
+alt="CORPSTITCH collection photo 1">
+
+<div>
+CORPSTITCH COLLECTION
+</div>
+
+</div>
+
+
+<!-- DRIVE PHOTO 2 -->
+
+<div class="drive-photo">
+
+<img
+src="https://drive.google.com/thumbnail?id=1NxMo13dF6CzYTa-kzdXjSw5S370mnTHD&sz=w1200"
+alt="CORPSTITCH collection photo 2">
+
+<div>
+UNIFORM COLLECTION
+</div>
+
+</div>
+
+
+<!-- DRIVE PHOTO 3 -->
+
+<div class="drive-photo">
+
+<img
+src="https://drive.google.com/thumbnail?id=14bzsV4jL1uSM-ffeExpWQpTlMCK42xlt&sz=w1200"
+alt="CORPSTITCH collection photo 3">
+
+<div>
+FORMAL WEAR
+</div>
+
+</div>
+
+
+<!-- DRIVE PHOTO 4 -->
+
+<div class="drive-photo">
+
+<img
+src="https://drive.google.com/thumbnail?id=1YatQgMrL930VTFsKJ_HATvB3PA9HEMOE&sz=w1200"
+alt="CORPSTITCH collection photo 4">
+
+<div>
+CORPORATE WEAR
+</div>
+
+</div>
+
+
+<!-- DRIVE PHOTO 5 -->
+
+<div class="drive-photo">
+
+<img
+src="https://drive.google.com/thumbnail?id=1W91V0tLh0MN6wXATUfFZumVBkO-dbtet&sz=w1200"
+alt="CORPSTITCH collection photo 5">
+
+<div>
+CUSTOM GARMENTS
+</div>
+
+</div>
+
+
+<!-- DRIVE PHOTO 6 -->
+
+<div class="drive-photo">
+
+<img
+src="https://drive.google.com/thumbnail?id=17q2THYFjxV-NPY5hSpT5XoWTV32hGsx1&sz=w1200"
+alt="CORPSTITCH collection photo 6">
+
+<div>
+TAILORING & STITCHING
+</div>
+
+</div>
+
+
+<!-- DRIVE PHOTO 7 -->
+
+<div class="drive-photo">
+
+<img
+src="https://drive.google.com/thumbnail?id=1IBU-jMIg6KvGeCXvHejxo-onZzQ7APM_&sz=w1200"
+alt="CORPSTITCH collection photo 7">
+
+<div>
+FABRIC & FINISHING
+</div>
+
+</div>
+
+
+<!-- DRIVE PHOTO 8 -->
+
+<div class="drive-photo">
+
+<img
+src="https://drive.google.com/thumbnail?id=1YsroNRL45-9k8nSUN2C4mdG55Lb8htjT&sz=w1200"
+alt="CORPSTITCH collection photo 8">
+
+<div>
+CORPSTITCH WORK
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =================================================
+SINGLE WORKING VIDEO SECTION
+================================================= -->
+
+<div class="eyebrow" style="margin-top:55px;">
+VIDEO SHOWCASE
+</div>
+
+<h2 class="section-title">
+See CORPSTITCH in action.
+</h2>
+
+
+<div class="single-video-container">
+
+<div class="drive-video">
+
+<iframe
+src="https://drive.google.com/file/d/1NxMo13dF6CzYTa-kzdXjSw5S370mnTHD/preview"
+allow="autoplay"
+allowfullscreen>
+</iframe>
+
+<div>
+CORPSTITCH VIDEO SHOWCASE
+</div>
+
+</div>
+
+</div>
+
+
+<div class="note">
+
+<strong>Google Drive note:</strong>
+The Drive files must be set to
+<strong>Anyone with the link → Viewer</strong>
+for visitors to see them on the website.
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+REVIEWS
+===================================================== -->
+
+<section id="reviews" class="page">
+
+<div class="container">
+
+<div class="eyebrow">
+CUSTOMER REVIEWS
+</div>
+
+<h2 class="section-title">
+5.0 rated by customers.
+</h2>
+
+
+<div class="rating-box">
+
+<div class="rating-number">
+5.0
+</div>
+
+<div>
+
+<div class="stars">
+★★★★★
+</div>
+
+<strong>
+16 Google Reviews
+</strong>
+
+<br>
+
+<small>
+Rating according to the supplied Google Maps listing.
+</small>
+
+</div>
+
+</div>
+
+
+<div class="reviews">
+
+
+<div class="review">
+
+<div class="stars">
+★★★★★
+</div>
+
+<p>
+"Good place to stitch wedding dress and corporate uniform."
+</p>
+
+<small>
+Mohammed Kabeer · 3 weeks ago
+</small>
+
+</div>
+
+
+<div class="review">
+
+<div class="stars">
+★★★★★
+</div>
+
+<p>
+"Brand class stitching works awesome clothing reasonable prices
+in town skilled worker."
+</p>
+
+<small>
+deena dayal · 1 month ago
+</small>
+
+</div>
+
+
+<div class="review">
+
+<div class="stars">
+★★★★★
+</div>
+
+<p>
+"Good quality."
+</p>
+
+<small>
+Babar Khan · 3 weeks ago
+</small>
+
+</div>
+
+</div>
+
+
+<div class="note">
+
+The supplied Maps information shows 16 reviews.
+Only the three review texts supplied in the prompt are reproduced;
+the remaining review text has not been invented.
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+CONTACT
+===================================================== -->
+
+<section id="contact" class="page">
+
+<div class="container contact-layout">
+
+
+<div>
+
+<div class="eyebrow">
+GET A QUOTE
+</div>
+
+<h2 class="section-title">
+Tell us what you need.
+</h2>
+
+<p class="text">
+
+Fill in your details below or chat with us instantly on WhatsApp with 1-click.
+
+</p>
+
+<!-- 1-CLICK WHATSAPP DIRECT BUTTON -->
+<div style="margin-top: 20px;">
+<a
+class="btn wa-green"
+style="width:100%; text-align:center; justify-content:center; padding:15px;"
+target="_blank"
+rel="noopener noreferrer"
+href="https://wa.me/917022514114?text=Hello%20CORPSTITCH%2C%20I%20want%20to%20discuss%20a%20bulk%20uniform%20requirement.">
+💬 QUICK CHAT ON WHATSAPP (1-CLICK)
+</a>
+</div>
+
+
+<div class="contact-info">
+
+
+<div class="info-box">
+
+<b>
+GST NUMBER
+</b>
+
+<span>
+29AKWPY2436Q1ZR
+</span>
+
+</div>
+
+
+<div class="info-box">
+
+<b>
+PHONE
+</b>
+
+<span>
+<a href="tel:+917022514114">
+7022514114
+</a>
+</span>
+
+</div>
+
+
+<div class="info-box">
+
+<b>
+WHATSAPP
+</b>
+
+<span>
+7022514114
+</span>
+
+</div>
+
+
+<div class="info-box">
+
+<b>
+EMAIL
+</b>
+
+<span>
+corpstitch1@gmail.com
+</span>
+
+</div>
+
+
+<div class="info-box">
+
+<b>
+BUSINESS HOURS
+</b>
+
+<span>
+11:00 AM – 8:00 PM
+</span>
+
+</div>
+
+
+<div class="info-box">
+
+<b>
+ADDRESS
+</b>
+
+<span>
+No. 74, Shop No. 5, First Floor,
+Dharmaraj Koil Street,
+Shivaji Nagar,
+Bengaluru – 560001
+</span>
+
+</div>
+
+
+<a
+class="btn"
+target="_blank"
+rel="noopener noreferrer"
+href="https://www.google.com/maps/search/?api=1&query=CORPSTITCH%2C%20Shop%20No.%205%2C%20First%20Floor%2C%20No.%2074%2C%20Dharmaraj%20Koil%20Street%2C%20Shivaji%20Nagar%2C%20Bengaluru%20560001">
+
+OPEN GOOGLE MAPS
+
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- SHORTENED FORM -->
+
+<form
+class="form"
+onsubmit="sendWhatsApp(event)">
+
+<div class="form-grid">
+
+
+<div class="form-group">
+
+<label>
+Full Name *
+</label>
+
+<input
+id="customerName"
+required
+placeholder="Your full name">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Contact Number *
+</label>
+
+<input
+id="customerPhone"
+required
+placeholder="Your phone number">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Company / Organisation
+</label>
+
+<input
+id="company"
+placeholder="Company name">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Product *
+</label>
+
+<select
+id="selectedProduct"
+required>
+
+<option value="">
+Select requirement
+</option>
+
+<option>
+Corporate & Industrial Uniforms
+</option>
+
+<option>
+School & College Uniforms
+</option>
+
+<option>
+Hotel & Hospitality Uniforms
+</option>
+
+<option>
+Corporate Blazers & Formal Wear
+</option>
+
+<option>
+2-Piece & 3-Piece Suits
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Approx Quantity *
+</label>
+
+<input
+id="quantity"
+required
+placeholder="Example: 100 sets">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+PIN Code *
+</label>
+
+<input
+id="pin"
+required
+inputmode="numeric"
+placeholder="560001">
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+Delivery Full Address *
+</label>
+
+<textarea
+id="fullAddress"
+required
+placeholder="House No., Street, Area, City..."></textarea>
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+Requirement Details (Fabric, Color, Logo, etc.)
+</label>
+
+<textarea
+id="requirements"
+placeholder="Mention your custom requirements here..."></textarea>
+
+</div>
+
+
+</div>
+
+
+<div class="form-note">
+
+<strong>WhatsApp Automation:</strong>
+Clicking submit will instantly open WhatsApp with your populated enquiry message ready to send.
+
+</div>
+
+
+<button
+type="submit"
+class="btn wa-green"
+style="width:100%; font-size:13px; padding:15px;">
+
+🚀 SEND ENQUIRY ON WHATSAPP
+
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+FOOTER
+===================================================== -->
+
+<footer>
+
+<div class="footer">
+
+
+<div>
+
+<a href="#home" onclick="showPage('home')" class="logo">
+<img src="https://drive.google.com/thumbnail?id=1ysY_gSDBjNCPsifYcBn_duSJqwy0zDr7&sz=w1000" alt="CORPSTITCH Logo" class="logo-img">
+<div class="logo-text">
+CORPSTITCH
+<span>UNIFORMS · FORMAL WEAR · B2B</span>
+</div>
+</a>
+
+<p style="margin-top:15px;">
+Professional uniform and garment manufacturing
+business based in Shivaji Nagar, Bengaluru.
+</p>
+
+</div>
+
+
+<div>
+
+<strong>
+QUICK LINKS
+</strong>
+
+<ul>
+
+<li>
+<a href="#home" onclick="showPage('home')">
+Home
+</a>
+</li>
+
+<li>
+<a href="#collections" onclick="showPage('collections')">
+Collections
+</a>
+</li>
+
+<li>
+<a href="#about" onclick="showPage('about')">
+About
+</a>
+</li>
+
+<li>
+<a href="#why" onclick="showPage('why')">
+Why Us
+</a>
+</li>
+
+<li>
+<a href="#contact" onclick="showPage('contact')">
+Contact
+</a>
+</li>
+
+</ul>
+
+</div>
+
+
+<div>
+
+<strong>
+CONTACT
+</strong>
+
+<ul>
+
+<li>
+GST: 29AKWPY2436Q1ZR
+</li>
+
+<li>
+7022514114
+</li>
+
+<li>
+corpstitch1@gmail.com
+</li>
+
+<li>
+11:00 AM – 8:00 PM
+</li>
+
+<li>
+Shivaji Nagar, Bengaluru
+</li>
+
+</ul>
+
+</div>
+
+
+</div>
+
+
+<div class="copyright">
+
+© CORPSTITCH · All Rights Reserved · GSTIN 29AKWPY2436Q1ZR
+
+</div>
+
+</footer>
+
+
+
+<a
+class="whatsapp"
+target="_blank"
+rel="noopener noreferrer"
+href="https://wa.me/917022514114?text=Hello%20CORPSTITCH%2C%20I%20want%20a%20bulk%20quotation.">
+💬 WhatsApp Us
+</a>
+
+
+
+<script>
+
+/* =====================================================
+PAGE NAVIGATION
+===================================================== */
+
+const pages = [
+    "home",
+    "collections",
+    "about",
+    "why",
+    "reviews",
+    "contact"
+];
+
+
+function showPage(page){
+
+    if(!pages.includes(page)){
+        page = "home";
+    }
+
+
+    document
+    .querySelectorAll(".page")
+    .forEach(function(section){
+
+        section.classList.remove("active");
+
+    });
+
+
+    const selected =
+    document.getElementById(page);
+
+
+    if(selected){
+        selected.classList.add("active");
+    }
+
+
+    document
+    .getElementById("navLinks")
+    .classList.remove("open");
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+
+    history.replaceState(
+        null,
+        "",
+        "#" + page
+    );
+
+}
+
+
+function loadPage(){
+
+    let page =
+    location.hash.replace("#","");
+
+    if(!page){
+        page = "home";
+    }
+
+    showPage(page);
+
+}
+
+
+window.addEventListener(
+    "hashchange",
+    loadPage
+);
+
+window.addEventListener(
+    "DOMContentLoaded",
+    loadPage
+);
+
+
+/* =====================================================
+MOBILE MENU
+===================================================== */
+
+function toggleMenu(){
+    const nav = document.getElementById("navLinks");
+    nav.classList.toggle("open");
+}
+
+
+/* =====================================================
+PRODUCT SELECTION & WHATSAPP
+===================================================== */
+
+function selectProduct(productName){
+    showPage("contact");
+    const select = document.getElementById("selectedProduct");
+    if(select){
+        select.value = productName;
+    }
+}
+
+// Security Sanitization Helper to Prevent XSS
+function sanitizeInput(str) {
+    return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function sendWhatsApp(event){
+    event.preventDefault();
+
+    const name = sanitizeInput(document.getElementById("customerName").value);
+    const phone = sanitizeInput(document.getElementById("customerPhone").value);
+    const comp = sanitizeInput(document.getElementById("company").value);
+    const product = sanitizeInput(document.getElementById("selectedProduct").value);
+    const qty = sanitizeInput(document.getElementById("quantity").value);
+    const pin = sanitizeInput(document.getElementById("pin").value);
+    const address = sanitizeInput(document.getElementById("fullAddress").value);
+    const reqs = sanitizeInput(document.getElementById("requirements").value);
+
+    let message = `Hello CORPSTITCH, I would like to place an enquiry:\n\n` +
+        `*Name:* ${name}\n` +
+        `*Phone:* ${phone}\n` +
+        `*Company:* ${comp || 'N/A'}\n` +
+        `*Product:* ${product}\n` +
+        `*Quantity:* ${qty}\n` +
+        `*PIN Code:* ${pin}\n` +
+        `*Delivery Address:* ${address}\n` +
+        `*Requirements:* ${reqs || 'N/A'}`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/917022514114?text=${encodedMessage}`;
+
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+}
+
+</script>
+</body>
+</html>
