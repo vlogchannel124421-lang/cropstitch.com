@@ -100,21 +100,92 @@ header{
 
 .nav-links{
     display:flex;
-    gap:25px;
+    gap:10px;
     align-items:center;
 }
 
 .nav-links a{
+    position:relative;
+    isolation:isolate;
+    overflow:hidden;
+    padding:10px 13px;
+    border-radius:10px;
     font-size:12px;
     font-weight:800;
+    letter-spacing:.45px;
+    color:#263047;
+    transition:color .28s ease, transform .28s ease, box-shadow .28s ease;
+}
+
+.nav-links a::before{
+    content:"";
+    position:absolute;
+    z-index:-1;
+    inset:0;
+    border-radius:10px;
+    background:linear-gradient(120deg,#6d28d9,#2563eb,#0891b2,#16a34a);
+    background-size:220% 220%;
+    opacity:0;
+    transition:opacity .28s ease;
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:13px;
+    right:13px;
+    bottom:5px;
+    height:2px;
+    border-radius:99px;
+    background:#fff;
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .28s ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible{
+    color:#fff;
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(37,99,235,.18);
+}
+
+.nav-links a:hover::before,
+.nav-links a:focus-visible::before{
+    opacity:1;
+    animation:navColourFlow 3s ease infinite;
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after{
+    transform:scaleX(1);
+}
+
+@keyframes navColourFlow{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }
 
 .menu-btn{
     display:none;
-    background:#fff;
-    border:1px solid #ddd;
-    border-radius:8px;
-    padding:9px 12px;
+    color:#fff;
+    font-weight:800;
+    letter-spacing:.6px;
+    background:linear-gradient(120deg,#6d28d9,#2563eb,#0891b2);
+    background-size:200% 200%;
+    border:0;
+    border-radius:10px;
+    padding:10px 15px;
+    cursor:pointer;
+    box-shadow:0 6px 16px rgba(37,99,235,.2);
+    transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.menu-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 9px 22px rgba(37,99,235,.28);
+    animation:navColourFlow 3s ease infinite;
 }
 
 .page{
@@ -214,12 +285,26 @@ header{
     height:600px;
     overflow:hidden;
     border-radius:22px;
+    position:relative;
+    background:#f4f1eb;
 }
 
 .hero-image img{
     width:100%;
     height:100%;
     object-fit:cover;
+    display:block;
+}
+
+.hero-image-caption{
+    position:absolute;
+    left:0;right:0;bottom:0;
+    padding:22px 20px 17px;
+    color:#fff;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:2px;
+    background:linear-gradient(transparent,rgba(0,0,0,.72));
 }
 
 .stats{
@@ -354,15 +439,25 @@ header{
 }
 
 .about-image{
-    height:540px;
+    width:100%;
+    min-height:300px;
+    padding:12px;
     overflow:hidden;
+    border:1px solid #e8e8e8;
     border-radius:22px;
+    background:#fafafa;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 .about-image img{
     width:100%;
-    height:100%;
-    object-fit:cover;
+    height:auto;
+    max-height:540px;
+    object-fit:contain;
+    object-position:center;
+    border-radius:12px;
 }
 
 .check-list{
@@ -426,34 +521,20 @@ header{
     font-size:13px;
 }
 
-/* VIDEO SECTION */
-
-.single-video-container{
-    max-width:700px;
-    margin:25px auto 0 auto;
-}
-
-.drive-video{
-    border:1px solid #e3e3e3;
-    border-radius:16px;
-    overflow:hidden;
-    background:#111;
-}
-
-.drive-video iframe{
-    width:100%;
-    height:400px;
-    border:0;
-    display:block;
-}
-
-.drive-video div{
-    background:#fff;
-    padding:13px;
-    font-size:12px;
-    font-weight:800;
-    text-align:center;
-}
+/* WORK PHOTO GALLERY */
+.work-gallery-heading{margin-top:58px}
+.work-gallery-intro{max-width:760px;margin-top:-8px;margin-bottom:24px}
+.work-gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:28px 0 8px}
+.work-gallery-card{margin:0;min-width:0;overflow:hidden;border:1px solid #e8e5df;border-radius:18px;background:#fff;box-shadow:0 10px 30px rgba(15,23,42,.06);animation:galleryRise .7s both;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease}
+.work-gallery-card:nth-child(2){animation-delay:.08s}.work-gallery-card:nth-child(3){animation-delay:.16s}.work-gallery-card:nth-child(4){animation-delay:.24s}.work-gallery-card:nth-child(5){animation-delay:.32s}.work-gallery-card:nth-child(6){animation-delay:.40s}
+.work-gallery-card:hover{transform:translateY(-7px);box-shadow:0 20px 42px rgba(15,23,42,.13);border-color:#c9a86a}
+.work-gallery-card img{display:block;width:100%;height:300px;object-fit:contain;background:#f8f7f4;padding:10px;box-sizing:border-box;transition:transform .55s ease}
+.work-gallery-card:hover img{transform:scale(1.035)}
+.work-gallery-card figcaption{display:flex;align-items:center;gap:12px;padding:15px 17px 17px}
+.work-gallery-card figcaption span{display:grid;place-items:center;flex:0 0 30px;height:30px;border-radius:50%;background:#f1e8d8;color:#5d4828;font-size:10px;font-weight:900}
+.work-gallery-card figcaption b{font-size:13px;letter-spacing:.1px}
+@keyframes galleryRise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.work-gallery-card{animation:none;transition:none}.work-gallery-card img{transition:none}}
 
 /* REVIEWS */
 
@@ -642,20 +723,49 @@ footer{
 @media(max-width:900px){
 
     .nav-links{
-        display:none;
+        display:flex;
         position:absolute;
         top:76px;
-        left:0;
-        right:0;
-        background:#fff;
-        padding:20px;
-        border-bottom:1px solid #ddd;
+        left:12px;
+        right:12px;
+        padding:14px;
+        border:1px solid rgba(99,102,241,.18);
+        border-radius:16px;
+        background:rgba(255,255,255,.98);
+        box-shadow:0 18px 40px rgba(15,23,42,.14);
         flex-direction:column;
-        align-items:flex-start;
+        align-items:stretch;
+        gap:6px;
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        transform:translateY(-10px) scale(.98);
+        transform-origin:top center;
+        transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
     }
 
     .nav-links.open{
-        display:flex;
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
+        transform:translateY(0) scale(1);
+    }
+
+    .nav-links a{
+        width:100%;
+        padding:12px 14px;
+        font-size:13px;
+        border:1px solid #eef0ff;
+        background:linear-gradient(90deg,#faf5ff,#eff6ff,#ecfeff);
+    }
+
+    .nav-links a::before{
+        opacity:0;
+    }
+
+    .nav-links a:hover::before,
+    .nav-links a:focus-visible::before{
+        opacity:1;
     }
 
     .menu-btn{
@@ -726,6 +836,90 @@ footer{
     }
 
 }
+
+
+@media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .nav-links a,
+    .nav-links a::before,
+    .nav-links a::after,
+    .menu-btn,
+    .nav-links{
+        animation:none !important;
+        transition:none !important;
+    }
+}
+
+
+/* Clickable product cards and Flipkart-style detail view */
+.product-clickable{cursor:pointer;outline-offset:4px}
+.product-clickable:focus-visible{outline:2px solid #111}
+.card-hint{margin-top:16px;font-size:10px;font-weight:800;letter-spacing:1px;color:#333}
+.product-modal{display:none;position:fixed;inset:0;z-index:9999;background:rgba(15,15,15,.72);padding:22px;overflow-y:auto;align-items:center;justify-content:center}
+.product-modal.open{display:flex}
+.product-modal-panel{position:relative;background:#fff;width:min(1050px,100%);max-height:calc(100vh - 44px);overflow-y:auto;border-radius:18px;box-shadow:0 25px 90px rgba(0,0,0,.25)}
+.modal-close{position:sticky;top:10px;float:right;z-index:2;margin:10px 10px -52px 0;width:42px;height:42px;border:0;border-radius:50%;background:#fff;box-shadow:0 2px 12px #0002;font-size:28px;cursor:pointer}
+.modal-product-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.modal-photo-wrap{min-height:520px;background:#f4f4f4;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-photo-wrap img{width:100%;height:100%;max-height:650px;object-fit:contain}
+.modal-info{padding:36px 32px 30px}
+.modal-info h2{font-size:30px;line-height:1.15;margin:14px 0 10px}
+.modal-price{font-size:24px;font-weight:900;margin:12px 0}
+.modal-call-cta{display:flex;align-items:center;justify-content:center;width:100%;min-height:50px;box-sizing:border-box;margin:14px 0 6px;background:#111;color:#fff;border-color:#111;text-align:center;text-decoration:none;font-weight:800;letter-spacing:.4px}
+.modal-call-cta:hover{background:#2a2a2a}
+.call-hint{font-size:11px!important;color:#777!important;margin:0 0 14px!important}
+.modal-info>p{color:#666;line-height:1.6;font-size:14px}
+.gender-options{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:22px 0}
+.gender-options[hidden]{display:none}
+.option-label{width:100%;font-size:12px;color:#666;font-weight:700}
+.gender-option{border:1px solid #d5d5d5;background:#fff;border-radius:8px;padding:11px 22px;cursor:pointer;font-weight:700}
+.gender-option.active{border-color:#111;background:#111;color:#fff}
+.quick-enquiry{margin-top:24px;padding-top:20px;border-top:1px solid #eee}
+.quick-enquiry h3{margin:0 0 5px;font-size:19px}
+.quick-enquiry p{font-size:12px;color:#666;margin:0 0 16px}
+.quick-enquiry form{display:grid;gap:8px}
+.quick-enquiry label{font-size:12px;font-weight:700;margin-top:4px}
+.quick-enquiry input,.quick-enquiry textarea{width:100%;border:1px solid #ddd;border-radius:8px;padding:12px;font:inherit;font-size:13px;box-sizing:border-box;background:#fff}
+.quick-enquiry textarea{resize:vertical}
+.quick-submit{margin-top:8px;width:100%;border:0;cursor:pointer}
+@media(max-width:700px){.product-modal{padding:10px;align-items:flex-start}.product-modal-panel{max-height:calc(100vh - 20px);border-radius:14px}.modal-product-grid{grid-template-columns:1fr}.modal-photo-wrap{min-height:280px;height:300px;padding:12px}.modal-photo-wrap img{max-height:280px}.modal-info{padding:24px 18px}.modal-info h2{font-size:25px}.modal-price{font-size:21px}}
+
+
+@media (max-width: 760px){
+    .work-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+    .work-gallery-card img{height:250px;}
+    .work-gallery-card figcaption{padding:12px;}
+    .work-gallery-card figcaption b{font-size:12px;}
+    .about-image{min-height:180px; padding:8px;}
+    .about-image img{max-height:440px;}
+}
+
+/* PREMIUM MOTION & CONVERSION POLISH */
+:root{--accent:#c9a86a;--ink:#111;--muted:#666}
+::selection{background:#c9a86a;color:#111}
+.page.active{animation:pageReveal .55s cubic-bezier(.2,.7,.2,1) both}
+@keyframes pageReveal{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.hero-copy>*{animation:riseIn .7s both}
+.hero-copy>*:nth-child(2){animation-delay:.08s}.hero-copy>*:nth-child(3){animation-delay:.16s}.hero-copy>*:nth-child(4){animation-delay:.24s}
+.hero-image{box-shadow:0 24px 70px rgba(17,17,17,.12);animation:heroFloat 6s ease-in-out infinite;transition:box-shadow .35s,transform .35s}
+.hero-image:hover{transform:translateY(-5px);box-shadow:0 30px 80px rgba(17,17,17,.18)}
+@keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes riseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.btn{position:relative;overflow:hidden;isolation:isolate;transition:transform .25s,box-shadow .25s,background .25s}
+.btn::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.24) 48%,transparent 70%);transform:translateX(-120%);transition:transform .6s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(17,17,17,.16)}.btn:hover::after{transform:translateX(120%)}
+.product-card,.feature,.review,.info-box,.form,.work-gallery-card{transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+.product-card:hover,.feature:hover,.review:hover,.info-box:hover{transform:translateY(-6px);box-shadow:0 18px 38px rgba(17,17,17,.09);border-color:#c9a86a}
+.feature{background:linear-gradient(145deg,#fff,#fcfaf6)}.feature-number{color:#9a7941;font-weight:900;letter-spacing:1px}
+.section-title{ text-wrap:balance }
+.topbar{background:linear-gradient(100deg,#111,#29241c,#111);background-size:200% 100%;animation:topbarFlow 12s ease infinite}
+@keyframes topbarFlow{0%,100%{background-position:0 0}50%{background-position:100% 0}}
+.floating-contact{position:fixed;right:18px;bottom:18px;z-index:1200;display:flex;flex-direction:column;gap:10px}
+.floating-contact a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 17px;border-radius:999px;color:#fff;font-size:12px;font-weight:900;letter-spacing:.2px;box-shadow:0 8px 24px rgba(0,0,0,.18);transition:transform .2s,box-shadow .2s}
+.floating-contact a:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 13px 28px rgba(0,0,0,.24)}
+.floating-contact .float-wa{background:#168b4b}.floating-contact .float-call{background:#111;border:1px solid #c9a86a}
+@media(max-width:700px){.floating-contact{right:10px;bottom:10px;gap:7px}.floating-contact a{min-height:43px;padding:0 13px;font-size:11px}.hero-image{animation:none}.hero{gap:30px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 
 </style>
 </head>
@@ -891,9 +1085,11 @@ OPEN MAP
 <div class="hero-image">
 
 <img
-src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkjmDhTIXe5SlMyha1wRwpRNbN-H0lbYwZucOkp5LykfUbcSk-7OjW_BmSkF5CGZ3LrZs6gbWGVeQ5F_C4UtQ1nOVu542RyHUDC__2rBkp_7bXVOSuAKRMj3olLNkZ7uO-kxX-o1Ngb8t5z=w408-h509-k-no"
-alt="CORPSTITCH"
+src="https://drive.google.com/thumbnail?id=1xq2-o3KWbWUwf-xQrDr1NbGqL_cnOUAS&sz=w1200"
+alt="CORPSTITCH fancy embroidery work tuxedo showcase"
+fetchpriority="high"
 >
+<div class="hero-image-caption">CORPSTITCH · FORMAL WEAR SHOWCASE</div>
 
 </div>
 
@@ -908,335 +1104,45 @@ COLLECTION
 ===================================================== -->
 
 <section id="collections" class="page">
-
-<div class="container">
-
-<div class="collection-head">
-
-<div>
-
-<div class="eyebrow">
-CORE COLLECTION · COMPETITIVE PRICING
-</div>
-
-<h2 class="section-title">
-Five key product categories.
-</h2>
-
-</div>
-
-<p>
-Indicative market-reference prices only. Final quotation
-depends on quantity, fabric, design, measurements,
-branding and customization.
-</p>
-
-</div>
-
-
-<div class="products">
-
-
-<!-- 1 -->
-
-<div class="product">
-
-<div class="product-image">
-
-<img
-src="https://drive.google.com/thumbnail?id=1DkaDe5TDuJB-tuy8rKwGUiOD4mxS-SNt&sz=w1000"
-alt="Corporate & Industrial Uniforms">
-
-</div>
-
-<div class="product-content">
-
-<span class="badge">BULK · VALUE PRICING</span>
-
-<h3>
-Corporate & Industrial Uniforms
-</h3>
-
-<p>
-Customised uniform requirements for corporate
-and industrial teams.
-</p>
-
-<div class="price">
-₹999 – ₹1,599
-<small>per set reference</small>
-</div>
-
-<div class="product-actions">
-
-<button
-class="btn"
-onclick="selectProduct('Corporate & Industrial Uniforms')">
-
-BULK ENQUIRY
-
-</button>
-
-<a
-class="btn wa-green"
-target="_blank"
-rel="noopener noreferrer"
-href="https://wa.me/917022514114?text=Hello%20CORPSTITCH%2C%20I%20want%20a%20quotation%20for%20Corporate%20%26%20Industrial%20Uniforms.">
-
-WHATSAPP
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- 2 -->
-
-<div class="product">
-
-<div class="product-image">
-
-<img
-src="https://drive.google.com/thumbnail?id=1H7Gknc-SNyOLFrhlz0xdqtgmfB9z_BN1&sz=w1000"
-alt="School & College Uniforms">
-
-</div>
-
-<div class="product-content">
-
-<span class="badge">INSTITUTIONAL</span>
-
-<h3>
-School & College Uniforms
-</h3>
-
-<p>
-Uniform requirements for schools and colleges
-with bulk quantity quotation.
-</p>
-
-<div class="price">
-₹449 – ₹799
-<small>per set reference</small>
-</div>
-
-<div class="product-actions">
-
-<button
-class="btn"
-onclick="selectProduct('School & College Uniforms')">
-
-BULK ENQUIRY
-
-</button>
-
-<a
-class="btn wa-green"
-target="_blank"
-rel="noopener noreferrer"
-href="https://wa.me/917022514114?text=Hello%20CORPSTITCH%2C%20I%20want%20a%20quotation%20for%20School%20%26%20College%20Uniforms.">
-
-WHATSAPP
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- 3 -->
-
-<div class="product">
-
-<div class="product-image">
-
-<img
-src="https://drive.google.com/thumbnail?id=1v8_aSZz1prln2sfwFXoPQ4vztd44jKPZ&sz=w1000"
-alt="Hotel & Hospitality Uniforms">
-
-</div>
-
-<div class="product-content">
-
-<span class="badge">HOSPITALITY</span>
-
-<h3>
-Hotel & Hospitality Uniforms
-</h3>
-
-<p>
-Professional hospitality uniform requirements
-for hotels and service teams.
-</p>
-
-<div class="price">
-₹899 – ₹2,199
-<small>per set reference</small>
-</div>
-
-<div class="product-actions">
-
-<button
-class="btn"
-onclick="selectProduct('Hotel & Hospitality Uniforms')">
-
-BULK ENQUIRY
-
-</button>
-
-<a
-class="btn wa-green"
-target="_blank"
-rel="noopener noreferrer"
-href="https://wa.me/917022514114?text=Hello%20CORPSTITCH%2C%20I%20want%20a%20quotation%20for%20Hotel%20%26%20Hospitality%20Uniforms.">
-
-WHATSAPP
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- 4 -->
-
-<div class="product">
-
-<div class="product-image">
-
-<img
-src="https://drive.google.com/thumbnail?id=1Wu7VsWIjjAq8RCufT0S_LqMXhNEmB-X1&sz=w1000"
-alt="Corporate Blazers & Formal Wear">
-
-</div>
-
-<div class="product-content">
-
-<span class="badge">FORMAL</span>
-
-<h3>
-Corporate Blazers & Formal Wear
-</h3>
-
-<p>
-Professional blazers and formal wear for
-corporate requirements.
-</p>
-
-<div class="price">
-₹1,699 – ₹3,299
-<small>per piece reference</small>
-</div>
-
-<div class="product-actions">
-
-<button
-class="btn"
-onclick="selectProduct('Corporate Blazers & Formal Wear')">
-
-BULK ENQUIRY
-
-</button>
-
-<a
-class="btn wa-green"
-target="_blank"
-rel="noopener noreferrer"
-href="https://wa.me/917022514114?text=Hello%20CORPSTITCH%2C%20I%20want%20a%20quotation%20for%20Corporate%20Blazers%20%26%20Formal%20Wear.">
-
-WHATSAPP
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- 5 -->
-
-<div class="product">
-
-<div class="product-image">
-
-<img
-src="https://drive.google.com/thumbnail?id=1b45zPLBHL_ji_NSye8qECuey-kYsWQmt&sz=w1000"
-alt="2-Piece & 3-Piece Suits">
-
-</div>
-
-<div class="product-content">
-
-<span class="badge">TAILORED</span>
-
-<h3>
-2-Piece & 3-Piece Suits
-</h3>
-
-<p>
-Tailored formal suits for professional and
-special occasion requirements.
-</p>
-
-<div class="price">
-₹2,499 – ₹5,699
-<small>per suit reference</small>
-</div>
-
-<div class="product-actions">
-
-<button
-class="btn"
-onclick="selectProduct('2-Piece & 3-Piece Suits')">
-
-BULK ENQUIRY
-
-</button>
-
-<a
-class="btn wa-green"
-target="_blank"
-rel="noopener noreferrer"
-href="https://wa.me/917022514114?text=Hello%20CORPSTITCH%2C%20I%20want%20a%20quotation%20for%202-Piece%20%26%203-Piece%20Suits.">
-
-WHATSAPP
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="note">
-
-<strong>Price disclaimer:</strong>
-These are indicative website prices and must be confirmed by CORPSTITCH before publishing.
-Final prices can vary with fabric, sizes, logo work, order quantity, taxes and delivery.
-
-</div>
-
-</div>
-
+  <div class="container">
+    <div class="collection-head">
+      <div>
+        <div class="eyebrow">PRODUCT COLLECTION · SERIAL NUMBERED</div>
+        <h2 class="section-title">Our Product Collection</h2>
+      </div>
+      <p>Explore each product for photos, pricing and details. For custom requirements or bulk orders, call or WhatsApp us.</p>
+    </div>
+    <div class="products">
+      <article class="product product-clickable" tabindex="0" role="button" aria-label="View Product 1 and 2, Female and Male options" onclick="openProduct('gender')" onkeydown="cardKey(event, 'gender')">
+        <div class="product-image"><img src="https://drive.google.com/thumbnail?id=1XiJ9GdFqy9bbfz21MChLRzqB2OJ47MKn&amp;sz=w1000" alt="Product collection, female option" loading="lazy"></div>
+        <div class="product-content"><span class="badge">PRODUCT 1 + 2</span><h3>Formal Outfit</h3><p>Available in Female and Male options. Select an option to view its photo.</p><div class="price">Price: Call or WhatsApp us <small>›</small></div><div class="card-hint">CLICK TO VIEW PRODUCT →</div></div>
+      </article>
+      <article class="product product-clickable" tabindex="0" role="button" aria-label="View Product 3 details" onclick="openProduct('3')" onkeydown="cardKey(event, '3')">
+        <div class="product-image"><img src="https://drive.google.com/thumbnail?id=1mtGANuPkGFZniAe1Nldd01ArKXZ1SDbn&amp;sz=w1000" alt="Product 3" loading="lazy"></div>
+        <div class="product-content"><span class="badge">PRODUCT 3</span><h3>Fancy Tuxedo</h3><p>Statement formalwear for special occasions.</p><div class="price">₹6,500 – ₹10,000 <small>›</small></div><div class="card-hint">CLICK TO VIEW PRODUCT →</div></div>
+      </article>
+      <article class="product product-clickable" tabindex="0" role="button" aria-label="View Product 4 details" onclick="openProduct('4')" onkeydown="cardKey(event, '4')">
+        <div class="product-image"><img src="https://drive.google.com/thumbnail?id=1os8ZU92w1FrsgYkAvb0Ied_d3mkr1xs7&amp;sz=w1000" alt="Product 4" loading="lazy"></div>
+        <div class="product-content"><span class="badge">PRODUCT 4</span><h3>Blazer</h3><p>Smart, versatile formal styling.</p><div class="price">Starting from ₹1,999 <small>›</small></div><div class="card-hint">CLICK TO VIEW PRODUCT →</div></div>
+      </article>
+      <article class="product product-clickable" tabindex="0" role="button" aria-label="View Product 5 details" onclick="openProduct('5')" onkeydown="cardKey(event, '5')">
+        <div class="product-image"><img src="https://drive.google.com/thumbnail?id=1qLwiHphXEaOxqPS9Ew_YCYLj6GTxYbhw&amp;sz=w1000" alt="Product 5" loading="lazy"></div>
+        <div class="product-content"><span class="badge">PRODUCT 5</span><h3>Tuxedo</h3><p>Classic tuxedo styling for formal occasions.</p><div class="price">₹6,000 – ₹10,000 <small>›</small></div><div class="card-hint">CLICK TO VIEW PRODUCT →</div></div>
+      </article>
+      <article class="product product-clickable" tabindex="0" role="button" aria-label="View Product 6 details" onclick="openProduct('6')" onkeydown="cardKey(event, '6')">
+        <div class="product-image"><img src="https://drive.google.com/thumbnail?id=1ur96m5HZjLbMsuKTkasuy3yhSKyumnim&amp;sz=w1000" alt="Product 6" loading="lazy"></div>
+        <div class="product-content"><span class="badge">PRODUCT 6</span><h3>Wedding Collection</h3><p>Contact us for designs and a personalised quotation.</p><div class="price">Call or WhatsApp for price <small>›</small></div><div class="card-hint">CLICK TO VIEW PRODUCT →</div></div>
+      </article>
+      <article class="product product-clickable" tabindex="0" role="button" aria-label="View Product 7 details" onclick="openProduct('7')" onkeydown="cardKey(event, '7')">
+        <div class="product-image"><img src="https://drive.google.com/thumbnail?id=1xq2-o3KWbWUwf-xQrDr1NbGqL_cnOUAS&amp;sz=w1000" alt="Product 7" loading="lazy"></div>
+        <div class="product-content"><span class="badge">PRODUCT 7</span><h3>Fancy Embroidery Work Tuxedo</h3><p>Pricing depends on the selected design.</p><div class="price">₹8,000 – ₹16,000 <small>›</small></div><div class="card-hint">CLICK TO VIEW PRODUCT →</div></div>
+      </article>
+    </div>
+    <div class="note">
+      <strong>Need a price or custom quote?</strong> Call <a href="tel:+917022514114">70225 14114</a> or <a href="https://wa.me/917022514114" target="_blank" rel="noopener noreferrer">DM us on WhatsApp</a>. Prices may vary by design and requirements.
+    </div>
+  </div>
 </section>
-
-
 
 <!-- =====================================================
 ABOUT
@@ -1249,8 +1155,8 @@ ABOUT
 <div class="about-image">
 
 <img
-src="https://lh3.googleusercontent.com/gps-cs-s/ANWiy9RA72mosXr4n-AUKg41939bZA__Fu-enS1m8h359qmTFqf5a5FR2RVlutAMgh4qlbkRkWwQMkwadGL5kVTeWiziNxOxTZ0D5p6dTXlPKIQ5Ktz2VNkWmkthrKxzETEfUPEKTdy_52u6yl3P=w238-h298-k-no"
-alt="CORPSTITCH">
+src="https://drive.google.com/thumbnail?id=1LTZDhiGsi9JKv3j1LQHMM2jmrxlzxror&sz=w1200"
+alt="CORPSTITCH business and garment manufacturing showcase">
 
 </div>
 
@@ -1457,44 +1363,39 @@ finishing based on supplied business information.
 
 
 <!-- =================================================
-SINGLE WORKING VIDEO SECTION
+CRAFT & WORK SHOWCASE — PHOTO GALLERY
 ================================================= -->
-
-<div class="eyebrow" style="margin-top:55px;">
-VIDEO SHOWCASE
+<div class="work-gallery-heading">
+  <div class="eyebrow">OUR WORK · CORPSTITCH</div>
+  <h2 class="section-title">A closer look at our craftsmanship.</h2>
+  <p class="text work-gallery-intro">Explore selected garment and finishing work from CORPSTITCH.</p>
 </div>
 
-<h2 class="section-title">
-See CORPSTITCH in action.
-</h2>
-
-
-<div class="single-video-container">
-
-<div class="drive-video">
-
-<iframe
-src="https://drive.google.com/file/d/1NxMo13dF6CzYTa-kzdXjSw5S370mnTHD/preview"
-allow="autoplay"
-allowfullscreen>
-</iframe>
-
-<div>
-CORPSTITCH VIDEO SHOWCASE
-</div>
-
-</div>
-
-</div>
-
-
-<div class="note">
-
-<strong>Google Drive note:</strong>
-The Drive files must be set to
-<strong>Anyone with the link → Viewer</strong>
-for visitors to see them on the website.
-
+<div class="work-gallery-grid" aria-label="CORPSTITCH work photo gallery">
+  <figure class="work-gallery-card">
+    <img src="https://drive.google.com/thumbnail?id=1IBU-jMIg6KvGeCXvHejxo-onZzQ7APM_&sz=w1200" alt="CORPSTITCH garment work showcase 1" loading="lazy">
+    <figcaption><span>01</span><b>Craftsmanship & Detail</b></figcaption>
+  </figure>
+  <figure class="work-gallery-card">
+    <img src="https://drive.google.com/thumbnail?id=1Jz9SYwISRmiHDNz0GUqXO3N2nFeST9gO&sz=w1200" alt="CORPSTITCH garment work showcase 2" loading="lazy">
+    <figcaption><span>02</span><b>Formal Wear</b></figcaption>
+  </figure>
+  <figure class="work-gallery-card">
+    <img src="https://drive.google.com/thumbnail?id=1atON5Kkq9wF2nPZB3jgLzRSwNLv4Gg-4&sz=w1200" alt="CORPSTITCH garment work showcase 3" loading="lazy">
+    <figcaption><span>03</span><b>Finishing & Style</b></figcaption>
+  </figure>
+  <figure class="work-gallery-card">
+    <img src="https://drive.google.com/thumbnail?id=1g6sKQ0ONybuObAm1_83LVU4QsA2bRxSM&sz=w1200" alt="CORPSTITCH garment work showcase 4" loading="lazy">
+    <figcaption><span>04</span><b>Made for Business</b></figcaption>
+  </figure>
+  <figure class="work-gallery-card">
+    <img src="https://drive.google.com/thumbnail?id=1zGAXnmqLGJ_x2qAC7DrIgiwEh7D1uUjI&sz=w1200" alt="CORPSTITCH garment work showcase 5" loading="lazy">
+    <figcaption><span>05</span><b>Quality Details</b></figcaption>
+  </figure>
+  <figure class="work-gallery-card">
+    <img src="https://drive.google.com/thumbnail?id=1v8_aSZz1prln2sfwFXoPQ4vztd44jKPZ&sz=w1200" alt="CORPSTITCH garment work showcase 6" loading="lazy">
+    <figcaption><span>06</span><b>Our Work, Up Close</b></figcaption>
+  </figure>
 </div>
 
 </div>
@@ -1822,25 +1723,13 @@ required>
 Select requirement
 </option>
 
-<option>
-Corporate & Industrial Uniforms
-</option>
-
-<option>
-School & College Uniforms
-</option>
-
-<option>
-Hotel & Hospitality Uniforms
-</option>
-
-<option>
-Corporate Blazers & Formal Wear
-</option>
-
-<option>
-2-Piece & 3-Piece Suits
-</option>
+                <option>Formal Outfit - Female</option>
+                <option>Formal Outfit - Male</option>
+                <option>Fancy Tuxedo</option>
+                <option>Blazer</option>
+                <option>Tuxedo</option>
+                <option>Wedding Collection</option>
+                <option>Fancy Embroidery Work Tuxedo</option>
 
 </select>
 
@@ -2047,16 +1936,47 @@ Shivaji Nagar, Bengaluru
 
 
 
-<a
-class="whatsapp"
-target="_blank"
-rel="noopener noreferrer"
-href="https://wa.me/917022514114?text=Hello%20CORPSTITCH%2C%20I%20want%20a%20bulk%20quotation.">
-💬 WhatsApp Us
-</a>
+<!-- PRODUCT DETAIL / QUICK ENQUIRY MODAL -->
+<div class="product-modal" id="productModal" aria-hidden="true" onclick="modalBackdropClose(event)">
+  <div class="product-modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalProductTitle">
+    <button class="modal-close" type="button" aria-label="Close product details" onclick="closeProduct()">×</button>
+    <div class="modal-product-grid">
+      <div class="modal-photo-wrap"><img id="modalProductImage" src="" alt="Selected product"></div>
+      <div class="modal-info">
+        <span class="badge" id="modalProductBadge">PRODUCT</span>
+        <h2 id="modalProductTitle">Product details</h2>
+        <div class="modal-price" id="modalProductPrice">Price to be added</div>
+        <p class="price-contact-note">For a quote, <a href="tel:+917022514114">call 70225 14114</a> or <a href="https://wa.me/917022514114" target="_blank" rel="noopener noreferrer">DM us on WhatsApp</a>.</p>
+        <a class="btn modal-call-cta" id="modalCallButton" href="tel:+917022514114" aria-label="Call CORPSTITCH at 70225 14114">☎ CALL NOW · 70225 14114</a>
+        <p class="call-hint">Tap once to open your phone dialler with our number ready.</p>
+        <p id="modalProductDescription">Product details will be updated soon.</p>
+        <div id="genderOptions" class="gender-options" hidden>
+          <span class="option-label">Choose option</span>
+          <button type="button" class="gender-option active" id="femaleOption" onclick="chooseGender('female')">Female</button>
+          <button type="button" class="gender-option" id="maleOption" onclick="chooseGender('male')">Male</button>
+        </div>
+        <div class="quick-enquiry">
+          <h3>Quick Enquiry</h3>
+          <p>Fill in your details and send a short enquiry on WhatsApp.</p>
+          <form id="quickEnquiryForm" onsubmit="sendQuickEnquiry(event)">
+            <label for="quickName">Your name *</label><input id="quickName" required placeholder="Enter your name">
+            <label for="quickPhone">WhatsApp number *</label><input id="quickPhone" type="tel" required placeholder="Enter phone number">
+            <label for="quickQuantity">Quantity *</label><input id="quickQuantity" required placeholder="e.g. 100 pieces / sets">
+            <label for="quickDetails">Additional details (optional)</label><textarea id="quickDetails" rows="2" placeholder="Size, colour or other requirements"></textarea>
+            <button class="btn wa-green quick-submit" type="submit">SEND ENQUIRY ON WHATSAPP</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
+<div class="floating-contact" aria-label="Quick contact options">
+  <a class="float-wa" href="https://wa.me/917022514114?text=Hello%20CORPSTITCH%2C%20I%20would%20like%20to%20enquire%20about%20your%20collection." target="_blank" rel="noopener noreferrer" aria-label="Enquire on WhatsApp">✆ WhatsApp</a>
+  <a class="float-call" href="tel:+917022514114" aria-label="Call CORPSTITCH">☎ Call Now</a>
+</div>
 <script>
 
 /* =====================================================
@@ -2157,6 +2077,72 @@ function toggleMenu(){
 PRODUCT SELECTION & WHATSAPP
 ===================================================== */
 
+const corpProducts = {
+  gender: {
+    type: 'gender', title: 'Formal Outfit', badge: 'PRODUCT 1 + 2', price: 'For price, call or WhatsApp us',
+    description: 'Formal Outfit available in Female and Male options. Choose an option to view its matching photo. Contact us for pricing.',
+    female: { name: 'Formal Outfit - Female', image: 'https://drive.google.com/thumbnail?id=1XiJ9GdFqy9bbfz21MChLRzqB2OJ47MKn&sz=w1200' },
+    male: { name: 'Formal Outfit - Male', image: 'https://drive.google.com/thumbnail?id=1dKeZ6qMn05tKRIbnKO-NgSfy-oqWJA69&sz=w1200' }
+  },
+  '3': {type:'single', name:'Fancy Tuxedo', badge:'PRODUCT 3', price:'₹6,500 – ₹10,000', image:'https://drive.google.com/thumbnail?id=1mtGANuPkGFZniAe1Nldd01ArKXZ1SDbn&sz=w1200', description:'Fancy Tuxedo. Price range: ₹6,500 to ₹10,000.'},
+  '4': {type:'single', name:'Blazer', badge:'PRODUCT 4', price:'Starting from ₹1,999', image:'https://drive.google.com/thumbnail?id=1os8ZU92w1FrsgYkAvb0Ied_d3mkr1xs7&sz=w1200', description:'Blazer collection starting from ₹1,999. Final price may vary by requirements.'},
+  '5': {type:'single', name:'Tuxedo', badge:'PRODUCT 5', price:'₹6,000 – ₹10,000', image:'https://drive.google.com/thumbnail?id=1qLwiHphXEaOxqPS9Ew_YCYLj6GTxYbhw&sz=w1200', description:'Tuxedo collection priced from ₹6,000 to ₹10,000.'},
+  '6': {type:'single', name:'Wedding Collection', badge:'PRODUCT 6', price:'Call or WhatsApp for price', image:'https://drive.google.com/thumbnail?id=1ur96m5HZjLbMsuKTkasuy3yhSKyumnim&sz=w1200', description:'Explore our Wedding Collection. Contact us by phone or WhatsApp DM for designs and pricing.'},
+  '7': {type:'single', name:'Fancy Embroidery Work Tuxedo', badge:'PRODUCT 7', price:'₹8,000 – ₹16,000 · As per design', image:'https://drive.google.com/thumbnail?id=1xq2-o3KWbWUwf-xQrDr1NbGqL_cnOUAS&sz=w1200', description:'Fancy Embroidery Work Tuxedo. Price starts from ₹8,000 and goes up to ₹16,000 as per design.'}
+};
+let activeProductKey = '3';
+let activeGender = 'female';
+
+function openProduct(key){
+  activeProductKey = String(key);
+  const item = corpProducts[activeProductKey];
+  if(!item) return;
+  const genderBox = document.getElementById('genderOptions');
+  genderBox.hidden = item.type !== 'gender';
+  document.getElementById('modalProductBadge').textContent = item.badge;
+  document.getElementById('modalProductPrice').textContent = item.price || 'For price, call or WhatsApp us';
+  if(item.type === 'gender'){
+    chooseGender('female');
+  } else {
+    document.getElementById('modalProductTitle').textContent = item.name;
+    document.getElementById('modalProductImage').src = item.image;
+    document.getElementById('modalProductImage').alt = item.name;
+    document.getElementById('modalProductDescription').textContent = item.description;
+  }
+  const modal = document.getElementById('productModal');
+  modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+}
+function chooseGender(gender){
+  activeGender = gender;
+  const item = corpProducts.gender[gender];
+  document.getElementById('modalProductTitle').textContent = item.name;
+  document.getElementById('modalProductPrice').textContent = corpProducts.gender.price;
+  document.getElementById('modalProductImage').src = item.image;
+  document.getElementById('modalProductImage').alt = item.name;
+  document.getElementById('modalProductDescription').textContent = corpProducts.gender.description;
+  document.getElementById('femaleOption').classList.toggle('active', gender === 'female');
+  document.getElementById('maleOption').classList.toggle('active', gender === 'male');
+}
+function closeProduct(){
+  const modal = document.getElementById('productModal');
+  modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+function modalBackdropClose(event){if(event.target.id === 'productModal') closeProduct();}
+function cardKey(event,key){if(event.key === 'Enter' || event.key === ' '){event.preventDefault();openProduct(key);}}
+function sendQuickEnquiry(event){
+  event.preventDefault();
+  const productName = activeProductKey === 'gender' ? corpProducts.gender[activeGender].name : corpProducts[activeProductKey].name;
+  const name = document.getElementById('quickName').value.trim();
+  const phone = document.getElementById('quickPhone').value.trim();
+  const quantity = document.getElementById('quickQuantity').value.trim();
+  const details = document.getElementById('quickDetails').value.trim();
+  const message = `Hello CORPSTITCH, I would like to enquire about a product.\n\nProduct: ${productName}\nName: ${name}\nWhatsApp: ${phone}\nQuantity: ${quantity}\nAdditional details: ${details || 'Not specified'}`;
+  window.open('https://wa.me/917022514114?text=' + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
+}
+document.addEventListener('keydown', function(event){if(event.key === 'Escape') closeProduct();});
+
 function selectProduct(productName){
     showPage("contact");
     const select = document.getElementById("selectedProduct");
@@ -2198,6 +2184,25 @@ function sendWhatsApp(event){
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
 }
 
+
+/* Motion accessibility and subtle staggered entrance */
+(function(){
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function animateActivePage(){
+    const active=document.querySelector('.page.active');
+    if(!active)return;
+    active.querySelectorAll('.feature,.product-card,.review,.work-gallery-card,.check,.info-box').forEach((el,i)=>{
+      el.style.animationDelay=reduce?'0s':Math.min(i*55,330)+'ms';
+      el.classList.add('motion-ready');
+    });
+  }
+  const style=document.createElement('style');
+  style.textContent='.motion-ready{animation:riseIn .55s both ease-out}';
+  document.head.appendChild(style);
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(animateActivePage,80));
+  const originalShowPage=window.showPage;
+  if(typeof originalShowPage==='function'){window.showPage=function(page){originalShowPage(page);setTimeout(animateActivePage,90)}}
+})();
 </script>
 </body>
 </html>
