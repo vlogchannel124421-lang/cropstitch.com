@@ -921,6 +921,88 @@ footer{
 @media(max-width:700px){.floating-contact{right:10px;bottom:10px;gap:7px}.floating-contact a{min-height:43px;padding:0 13px;font-size:11px}.hero-image{animation:none}.hero{gap:30px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 
+
+
+/* DEVICE-WIDE RESPONSIVE SAFETY FIXES */
+html{width:100%;max-width:100%;overflow-x:clip;scroll-padding-top:100px}
+body{width:100%;max-width:100%;overflow-x:clip;overflow-wrap:break-word;-webkit-text-size-adjust:100%}
+main,section,header,footer,nav,article,aside,div{min-width:0}
+.container,.navbar,.hero,.two-column,.contact-layout,.products,.features,.reviews,.footer,.work-gallery-grid{min-width:0;max-width:100%}
+img,video,iframe,svg{max-width:100%}
+input,textarea,select,button{max-width:100%;}
+.title,.section-title,h1,h2,h3,p,a,button,label,figcaption{overflow-wrap:anywhere}
+.navbar{position:relative;gap:12px}
+.logo{flex:1 1 auto;min-width:0;max-width:calc(100% - 86px);gap:8px}
+.logo-img{flex:0 0 auto;width:clamp(34px,5vw,50px);height:clamp(34px,5vw,50px)}
+.logo-text{min-width:0;font-size:clamp(14px,1.75vw,21px);letter-spacing:clamp(1px,.28vw,4px);overflow-wrap:normal;white-space:nowrap}
+.logo-text span{font-size:clamp(6px,.7vw,8px);letter-spacing:clamp(.4px,.12vw,2px);white-space:normal;line-height:1.35}
+.menu-btn{flex:0 0 auto;white-space:nowrap;min-height:42px}
+.nav-links{max-width:calc(100vw - 24px);z-index:1001}
+.hero>* ,.two-column>* ,.contact-layout>*{min-width:0;max-width:100%}
+.hero-copy,.hero-image,.about-image,.work-gallery-card,.product-card,.feature,.review,.info-box,.form{min-width:0;max-width:100%}
+.hero-image img,.about-image img,.work-gallery-card img{width:100%;max-width:100%;object-fit:contain}
+.work-gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.work-gallery-card img{height:auto;aspect-ratio:4/3;object-fit:cover}
+.product-modal-panel,.modal-product-grid,.modal-info,.modal-photo-wrap{min-width:0;max-width:100%}
+.modal-info input,.modal-info textarea{min-width:0}
+.floating-contact{max-width:calc(100vw - 20px)}
+.floating-contact a{white-space:nowrap}
+@media(max-width:900px){
+ .navbar{min-height:68px;padding:9px 16px;gap:10px}
+ .logo{max-width:calc(100% - 82px)}
+ .logo-text{font-size:clamp(14px,2.6vw,19px);letter-spacing:clamp(.8px,.22vw,2.5px)}
+ .logo-text span{font-size:7px;letter-spacing:.6px}
+ .menu-btn{padding:10px 12px;font-size:12px}
+ .nav-links{top:calc(100% + 5px);left:12px;right:12px;width:auto}
+ .hero,.two-column,.contact-layout{grid-template-columns:minmax(0,1fr)}
+ .products,.features,.reviews,.footer{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hero-image{height:auto;min-height:0;max-height:none;aspect-ratio:4/3}
+ .hero-image img{height:100%;object-fit:contain}
+}
+@media(max-width:600px){
+ .topbar{padding:8px 12px;font-size:9px;letter-spacing:.3px;line-height:1.45}
+ .navbar{padding:9px 12px;min-height:64px;gap:8px}
+ .logo{gap:6px;max-width:calc(100% - 75px)}
+ .logo-img{width:34px;height:34px}
+ .logo-text{font-size:clamp(12px,3.7vw,16px);letter-spacing:clamp(.4px,.4vw,1.5px);line-height:1.1}
+ .logo-text span{font-size:6px;letter-spacing:.35px;line-height:1.25;margin-top:3px}
+ .menu-btn{padding:9px 10px;min-height:40px;font-size:11px;border-radius:8px}
+ .container{padding:44px 14px}
+ .hero{padding:38px 14px;gap:24px}
+ .title{font-size:clamp(30px,9vw,42px);line-height:1.08;letter-spacing:-.6px}
+ .section-title{font-size:clamp(27px,7.5vw,35px);line-height:1.15;letter-spacing:-.4px}
+ .hero p,.text{font-size:14px;line-height:1.65}
+ .products,.features,.reviews,.footer,.work-gallery-grid{grid-template-columns:minmax(0,1fr)}
+ .work-gallery-grid{gap:16px}
+ .work-gallery-card img{aspect-ratio:4/3;height:auto}
+ .hero-image{aspect-ratio:4/3}
+ .hero-image-caption{left:10px;right:10px;bottom:10px;font-size:11px;padding:9px 11px}
+ .btn{max-width:100%;white-space:normal;text-align:center}
+ .floating-contact{right:8px;bottom:8px;gap:6px}
+ .floating-contact a{min-height:40px;padding:0 11px;font-size:10px}
+ .product-modal{padding:8px}
+ .modal-photo-wrap{height:auto;min-height:0;aspect-ratio:1/1}
+ .modal-photo-wrap img{max-height:100%;object-fit:contain}
+ .modal-info{padding:20px 14px}
+ .quick-enquiry input,.quick-enquiry textarea{font-size:16px}
+}
+@media(max-width:360px){
+ .logo{max-width:calc(100% - 68px);gap:4px}
+ .logo-img{width:29px;height:29px}
+ .logo-text{font-size:11px;letter-spacing:0}
+ .logo-text span{font-size:5.5px;letter-spacing:0}
+ .menu-btn{padding:8px 9px;font-size:10px}
+ .topbar{font-size:8px}
+ .floating-contact a{min-height:37px;padding:0 9px;font-size:9px}
+}
+@media(min-width:901px) and (max-width:1100px){
+ .navbar{padding:0 16px;gap:8px}
+ .logo-text{font-size:17px;letter-spacing:2px}
+ .logo-text span{letter-spacing:1px}
+ .nav-links{gap:2px}
+ .nav-links a{padding:9px 8px;font-size:11px}
+}
+
 </style>
 </head>
 
