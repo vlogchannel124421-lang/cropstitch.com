@@ -355,6 +355,7 @@ body{overflow-x:clip}
 .mq span::after{content:"✦";margin-left:56px;color:var(--gold)}
 @keyframes mq{to{translate:-50% 0}}
 /* floating gold light behind heroes */
+.page{overflow-x:clip}   /* nothing may stick out past the screen's right edge (the soft glow behind the hero used to, which left blank white space on phones) */
 .hero{position:relative;isolation:isolate}
 .hero::before,.hero::after{content:"";position:absolute;z-index:-1;border-radius:50%;filter:blur(70px);pointer-events:none}
 .hero::before{width:380px;height:380px;left:0;top:20px;background:#a17c3c30;animation:drift 12s ease-in-out infinite alternate}
@@ -567,6 +568,29 @@ header.scrolled .logo .lg img{height:58px;transition:height .3s}
   .reels{overflow:visible;scroll-snap-type:none}
   .reels .tile{flex:1 1 0;max-width:none;min-height:360px}
   .reel-ui{display:none}
+}
+
+/* ################ PHONE / TABLET MENU: dark full-width panel, arrows on the right, Call + WhatsApp buttons at the bottom ################ */
+.menu-cta{display:none}
+body.menu-open .float{opacity:0;pointer-events:none}
+@media(max-width:900px){
+  .links{background:var(--ink);padding:6px 18px 20px;border-bottom:3px solid var(--gold);box-shadow:0 28px 40px #0007;
+    max-height:calc(100vh - 115px);max-height:calc(100dvh - 115px);overflow-y:auto;overscroll-behavior:contain}   /* never taller than the screen: scrolls inside if needed */
+  .links a{display:flex;justify-content:space-between;align-items:center;padding:16px 4px;border-radius:0;border-bottom:1px solid #ffffff1c;color:#fff;font-size:14px;letter-spacing:1.6px}
+  .links a:hover,.links a.on{background:transparent;color:#d9b062}
+  .links a.on{padding-left:14px;box-shadow:inset 3px 0 0 var(--gold)}
+  .links a::before{background:#ffffff0d}
+  .links a::after{position:static;width:auto;height:auto;content:"→";background:none;transform:none;color:var(--gold);font-size:19px;letter-spacing:0;transition:transform .3s}
+  .links a:hover::after,.links a.on::after{transform:translateX(5px)}
+  .links .menu-cta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+  .links .menu-cta a{justify-content:center;gap:8px;padding:0;min-height:50px;border:0;border-radius:10px;font-size:13px;letter-spacing:.6px;color:#fff;background:var(--wa);box-shadow:none}
+  .links .menu-cta a::before,.links .menu-cta a::after{display:none}
+  .links .menu-cta .mc-call{background:#fff;color:var(--ink)}
+}
+@media(max-width:900px) and (max-height:700px){            /* short phones: slightly tighter rows so everything fits without scrolling */
+  .links a{padding:12px 4px}
+  .links .menu-cta{margin-top:12px}
+  .links .menu-cta a{min-height:46px}
 }
 
 /* ################ MOBILE / TOUCH FRIENDLY (bigger tap areas, no iPhone zoom on forms) ################ */
@@ -1241,7 +1265,9 @@ document.body.insertAdjacentHTML('afterbegin', `
 <div class="topbar">CORPSTITCH · CUSTOM UNIFORMS · FORMAL WEAR · BULK &amp; B2B</div>
 <header><nav class="nav" aria-label="Main">
   ${logoHTML}
-  <div class="links" id="links">${PAGES.map(([f,n]) => `<a href="#${f}">${n}</a>`).join('')}</div>
+  <div class="links" id="links">${PAGES.map(([f,n]) => `<a href="#${f}">${n}</a>`).join('')}
+    <div class="menu-cta"><a class="mc-call" href="tel:+${CONFIG.phone}">☎ Call Now</a><a class="mc-wa" href="${waLink('Hello CORPSTITCH, I would like to enquire about uniforms and formal wear.')}" target="_blank" rel="noopener">✆ WhatsApp</a></div>
+  </div>
   <button class="menu" type="button" aria-controls="links" aria-expanded="false">MENU</button>
 </nav></header>`);
 
@@ -1264,10 +1290,16 @@ document.body.insertAdjacentHTML('beforeend', `
 
 /* ---------- mobile menu ---------- */
 const menuBtn = document.querySelector('.menu');
-menuBtn.onclick = () => {
-  const open = document.getElementById('links').classList.toggle('open');
+function setMenu(open) {                       // open / close the phone menu
+  document.getElementById('links').classList.toggle('open', open);
   menuBtn.setAttribute('aria-expanded', open);
-};
+  menuBtn.textContent = open ? 'CLOSE' : 'MENU';
+  document.body.classList.toggle('menu-open', open);        // hides the floating WhatsApp/Call buttons while the menu is open
+}
+menuBtn.onclick = () => setMenu(!document.getElementById('links').classList.contains('open'));
+document.getElementById('links').addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });   // tapping any link closes it
+document.addEventListener('click', e => { if (!e.target.closest('.nav')) setMenu(false); });                     // tapping outside closes it
+addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
 /* ---------- auto-fill links: <a data-wa="message"> and <a data-call> ---------- */
 document.querySelectorAll('[data-wa]').forEach(a => { a.href = waLink(a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; });
@@ -1388,8 +1420,7 @@ function show(id) {
     a.classList.toggle('on', on);
     on ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current');
   });
-  document.getElementById('links').classList.remove('open');
-  menuBtn.setAttribute('aria-expanded', false);
+  setMenu(false);
   document.title = TITLES[id];
   scrollTo(0, 0);
   return id;
